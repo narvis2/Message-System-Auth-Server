@@ -5,6 +5,8 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.noarg") version "1.9.25"
     kotlin("plugin.allopen") version "1.9.25"
+    kotlin("kapt") version "1.9.25"
+    kotlin("plugin.jpa") version "1.9.25"
 }
 
 group = "com.narvi"
@@ -32,9 +34,21 @@ allOpen {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // Redis
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    // Redis + Session
+    implementation("org.springframework.session:spring-session-data-redis")
+
+    implementation("io.github.microutils:kotlin-logging:3.0.5")
+
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
+    runtimeOnly("com.mysql:mysql-connector-j")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
